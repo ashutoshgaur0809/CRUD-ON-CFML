@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <cfif isDefined('form')>
+        <cfquery name="insertEmp">
+            INSERT INTO employees_new_one (FIRST_NAME,LAST_NAME,EMAIL,SALARY) VALUE ("#form.fname#","#form.lname#","#form.email#","#form.salary#");
+        </cfquery>
+        <cflocation 
+        url = "index.cfm" >
+        
+    </cfif>
+</body>
+</html>
