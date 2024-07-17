@@ -1,0 +1,144 @@
+<!--- <cfoutput>   
+    <cfquery name = "get_Employees">
+        SELECT * from employees_new_one;
+    </cfquery>
+   <!--- <cfdump var="#get_Employees#"><cfabort> --->
+   
+    <cfform name="insertEmp" action="action.cfm">
+        
+        First Name : 
+        <cfinput type="text" name="fname"> <br> <br>
+        Last Name : 
+        <cfinput type="text" name="lname"> <br>
+        <cfinput type="submit" name="Submit" value="Submit">
+    </cfform>
+</cfoutput> --->
+
+<!--- <cfif CGI.REQUEST_METHOD EQ 'post'>
+    
+</cfif>
+
+
+<cfoutput>
+    <cfquery name="Get_Emp">
+    SELECT * FROM employees_new_one;
+    </cfquery>
+
+    <cfdump  var="#Get_Emp#">
+
+    <cfform name="insertEmp" action="action.cfm">
+        
+        First Name : 
+        <cfinput type="text" name="fname"> <br> <br>
+        Last Name : 
+        <cfinput type="text" name="lname"> <br> <br>
+        Email :
+        <cfinput type="text" name="email"> <br> <br>
+        <cfinput type="submit" name="btnSubmit" value="Submit">
+    </cfform>
+
+</cfoutput> --->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Latest compiled and minified CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+ 
+</head>
+<body>
+    <cfoutput>
+        <cfquery name="Get_Emp">
+            SELECT FIRST_NAME, LAST_NAME, EMAIL, SALARY FROM employees_new_one;
+        </cfquery>
+    
+        <div class="container mt-3">
+            <h2>Employee Table</h2>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Firstname</th>
+                        <th>Lastname</th>
+                        <th>Email</th>
+                        <th>Salary</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <cfloop query="Get_Emp">
+                        <tr>
+                            <td>#FIRST_NAME#</td>
+                            <td>#LAST_NAME#</td>
+                            <td>#EMAIL#</td>
+                            <td>#SALARY#</td>
+                            <td>
+                                <button type="button" class="btn btn-warning">UPDATE</button>
+                                <button type="button" class="btn btn-danger">DELETE</button>
+                            </td>
+                        </tr>
+                    </cfloop>
+                </tbody>
+            </table>
+        </div>
+    
+        <div class="container mt-3">
+            
+            <!-- Button triggers modal using JavaScript -->
+            <button type="button" class="btn btn-primary open-modal">
+                Add
+            </button>
+        </div>
+        <div class="modal fade myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Insert in Table</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container mt-3">
+                            <cfform name="insertEmp" action="add.cfm">
+        
+                                First Name : 
+                                <cfinput type="text" name="fname" class="form-control"> <br> <br>
+                                Last Name : 
+                                <cfinput type="text" name="lname" class="form-control"> <br> <br>
+                                Email :
+                                <cfinput type="text" name="email" class="form-control"> <br> <br>
+                                Salary :
+                                <cfinput type="text" name="salary" class="form-control"> <br> <br> 
+                               
+                                
+                                
+                               
+                                <cfinput type="submit" name="btnSubmit" value="Submit" class="btn btn-primary">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </cfform>
+                           
+                          </div>
+                    </div>
+                  
+                </div>
+            </div>
+        </div>
+    
+    </cfoutput>
+    
+    <script>
+        $(document).ready(function() {
+            $('.open-modal').click(function() {
+                $('.myModal').modal('show');
+            });
+        });
+    </script>
+    
+</body>
+</html>
